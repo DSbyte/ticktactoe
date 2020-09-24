@@ -43,7 +43,7 @@ public class TickTacToe {
         } else if(user.equals("computer")){
             move = r.nextInt(9) + 1;
             while(pPos.contains(move) || cPos.contains(move)){
-                move = in.nextInt();
+                move = r.nextInt(9) + 1;
             }
             cPos.add(move);
             xo = 'O';
