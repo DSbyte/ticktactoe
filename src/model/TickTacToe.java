@@ -18,9 +18,9 @@ public class TickTacToe {
     static ArrayList<Integer> cPos = new ArrayList<>();
 
     public static void displayBoard(){
-        for(int r=0; r<game.length; r++){
-            for(int c=0; c<game[r].length; c++){
-                System.out.print(game[r][c]);
+        for(char[] r: game){
+            for(char c: r){
+                System.out.print(c);
             }
             System.out.println();
         }
@@ -34,10 +34,17 @@ public class TickTacToe {
 
         if (user.equals("player")){
             move = in.nextInt();
+            while(pPos.contains(move) || cPos.contains(move)){
+                System.out.println("Please enter a valid position");
+                move = in.nextInt();
+            }
             pPos.add(move);
             xo = 'X';
         } else if(user.equals("computer")){
             move = r.nextInt(9) + 1;
+            while(pPos.contains(move) || cPos.contains(move)){
+                move = in.nextInt();
+            }
             cPos.add(move);
             xo = 'O';
         }
@@ -88,7 +95,7 @@ public class TickTacToe {
 
         for(List l: winn){
             if(pPos.containsAll(l)){
-                System.out.println("Congs! You won!");
+                System.out.println("Congrats! You won!");
                 return true;
             } else if (cPos.containsAll(l)){
                 System.out.println("CPU Wins! Better luck next time!");
@@ -109,7 +116,7 @@ public class TickTacToe {
             addToBoard("player");
             addToBoard("computer");
             displayBoard();
-            if (win() == true){
+            if (win()){
                 break;
             }
         }
