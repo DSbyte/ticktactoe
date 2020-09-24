@@ -35,12 +35,10 @@ public class TickTacToe {
         if (user.equals("player")){
             move = in.nextInt();
             pPos.add(move);
-            System.out.print(pPos);
             xo = 'X';
         } else if(user.equals("computer")){
             move = r.nextInt(9) + 1;
             cPos.add(move);
-            System.out.print(cPos);
             xo = 'O';
         }
 
@@ -68,7 +66,7 @@ public class TickTacToe {
 
 
     }
-    static public String win(){
+    static public boolean win(){
         List tr = Arrays.asList(1,2,3);
         List mr = Arrays.asList(4,5,6);
         List br = Arrays.asList(7,8,9);
@@ -90,15 +88,17 @@ public class TickTacToe {
 
         for(List l: winn){
             if(pPos.containsAll(l)){
-                return "Congs! You won!";
-            }
-            else if (cPos.containsAll(l)){
-                return "CPU Wins! Better luck next time!";
+                System.out.println("Congs! You won!");
+                return true;
+            } else if (cPos.containsAll(l)){
+                System.out.println("CPU Wins! Better luck next time!");
+                return true;
             } else if (pPos.size() + cPos.size() == 9){
-                return "TIEEEE";
+                System.out.println("Game TIED, Start again :D");
+                return true;
             }
         }
-        return "";
+        return false;
     }
 
     public static void main(String[] args) {
@@ -109,7 +109,9 @@ public class TickTacToe {
             addToBoard("player");
             addToBoard("computer");
             displayBoard();
-            System.out.println(win());
+            if (win() == true){
+                break;
+            }
         }
     }
 }
